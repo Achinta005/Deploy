@@ -8,9 +8,6 @@ env/
 venv/
 ENV/
 
-# Models (optional - don't commit large files)
-models/*.pkl
-
 # IDE
 .vscode/
 .idea/
