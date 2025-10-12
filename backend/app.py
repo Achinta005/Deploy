@@ -16,7 +16,8 @@ CORS(app, resources={
             "http://localhost:3000",
             "http://localhost:5000",
             "https://deploy-five-khaki.vercel.app",  # Your Vercel domain
-            "https://*.vercel.app"  # All Vercel preview URLs
+            "https://*.vercel.app" , # All Vercel preview URLs
+            "https://deploy-ten-orcin.vercel.app"
         ],
         "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
         "allow_headers": ["Content-Type", "Authorization"],
@@ -48,4 +49,4 @@ def health():
     return {"status": "healthy"}
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=5000)
