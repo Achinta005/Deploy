@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: medical-charges-api
-    env: python
-    plan: free
-    runtime: python-3.11
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
