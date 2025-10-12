@@ -1,0 +1,13 @@
+name: medical-api
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pip
+  - numpy
+  - scikit-learn
+  - pip:
+    - Flask==2.3.3
+    - Flask-CORS==4.0.0
+    - Gunicorn==21.2.0
