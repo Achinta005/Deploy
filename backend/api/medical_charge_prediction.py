@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 import os
 
-predict_bp = Blueprint('predict', __name__, url_prefix='/api')
+predict_medical_charge = Blueprint('predict', __name__)
 
 # Load models
 model_path = os.path.join(os.path.dirname(__file__), '..', 'models')
@@ -15,13 +15,13 @@ try:
     with open(os.path.join(model_path, 'smoker_model.pkl'), 'rb') as f:
         smoker_model = pickle.load(f)
     
-    print("✓ Models loaded successfully")
+    print("Models loaded successfully :(1)smoker_model.pkl (2)non_smoker_model.pkl")
 except Exception as e:
     print(f"✗ Error loading models: {e}")
     non_smoker_model = None
     smoker_model = None
 
-@predict_bp.route('/predict', methods=['POST'])
+@predict_medical_charge.route('/predict', methods=['POST'])
 def predict():
     """Predict medical charges based on input data"""
     try:
@@ -92,7 +92,7 @@ def predict():
     except Exception as e:
         return jsonify({"error": f"Server error: {str(e)}"}), 500
 
-@predict_bp.route('/predict-info', methods=['GET'])
+@predict_medical_charge.route('/predict-info', methods=['GET'])
 def predict_info():
     """Get information about prediction endpoint"""
     return jsonify({

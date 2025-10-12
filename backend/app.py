@@ -25,16 +25,20 @@ CORS(app, resources={
 })
 
 # Import API routes
-from api.predict import predict_bp
-app.register_blueprint(predict_bp)
+from api.medical_charge_prediction import predict_medical_charge
+app.register_blueprint(predict_medical_charge, url_prefix='/medical-charge')
+
+from api.heart_disease_prediction import prediction_heart_disease
+app.register_blueprint(prediction_heart_disease,url_prefix='/heart-disease')
 
 @app.route('/')
 def home():
     return {
-        "message": "Medical Charges Prediction API",
+        "message": "Machine Learning Models Api",
         "version": "1.0.0",
         "endpoints": {
-            "predict": "/api/predict",
+            "predict_medical_charge": "/medical-charge/predict",
+            "prediction_heart_disease":"/heart-disease/predict",
             "health": "/health"
         }
     }
