@@ -397,7 +397,7 @@
             try {
                 const response = await fetch(API_URL + '/health');
                 if (response.ok) {
-                    apiStatus.textContent = '✅ Connected (localhost:5000)';
+                    apiStatus.textContent = '✅ Connected (Medical Charges Api)';
                     apiStatus.style.color = '#2e7d32';
                 } else {
                     throw new Error('API not responding');
