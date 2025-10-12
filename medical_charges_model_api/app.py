@@ -12,7 +12,7 @@ app.config.from_object(DevelopmentConfig)
 # Update CORS to allow Vercel domain
 CORS(app, resources={
     r"/api/*": {
-        "origins": ["http://localhost:3000", "https://*.vercel.app"],
+        "origins": ["http://localhost:3000", "https://deploy-five-khaki.vercel.app"],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type"]
     }
