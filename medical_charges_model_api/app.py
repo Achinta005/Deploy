@@ -9,12 +9,18 @@ app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 
 # Enable CORS
-# Update CORS to allow Vercel domain
+# Enable CORS for ALL routes from your Vercel domain
 CORS(app, resources={
-    r"/api/*": {
-        "origins": ["http://localhost:3000", "https://deploy-five-khaki.vercel.app"],
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type"]
+    r"/*": {
+        "origins": [
+            "http://localhost:3000",
+            "http://localhost:5000",
+            "https://deploy-five-khaki.vercel.app",  # Your Vercel domain
+            "https://*.vercel.app"  # All Vercel preview URLs
+        ],
+        "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "supports_credentials": True
     }
 })
 
