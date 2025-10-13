@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { AlertCircle, CheckCircle, Loader } from "lucide-react";
+import { useState, useEffect } from "react";
+import { AlertCircle, CheckCircle, Loader,Home } from "lucide-react";
 
 export default function ChurnPredictionPage() {
   const [formData, setFormData] = useState({
@@ -28,6 +28,115 @@ export default function ChurnPredictionPage() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [apiStatus, setApiStatus] = useState("Checking...");
+  const [statusColor, setStatusColor] = useState("text-yellow-600");
+
+  // Predefined sample profiles
+  const sampleProfiles = {
+    highRisk: {
+      name: "High Risk Customer",
+      description: "Month-to-month, high charges, minimal services",
+      data: {
+        SeniorCitizen: 1,
+        tenure: "2",
+        MonthlyCharges: "89.50",
+        TotalCharges: "179.00",
+        gender: "Male",
+        Partner: "No",
+        Dependents: "No",
+        PhoneService: "Yes",
+        MultipleLines: "No",
+        InternetService: "Fiber optic",
+        OnlineSecurity: "No",
+        OnlineBackup: "No",
+        DeviceProtection: "No",
+        TechSupport: "No",
+        StreamingTV: "No",
+        StreamingMovies: "No",
+        Contract: "Month-to-month",
+        PaperlessBilling: "Yes",
+        PaymentMethod: "Electronic check",
+      },
+    },
+    lowRisk: {
+      name: "Low Risk Customer",
+      description: "Long tenure, multiple services, contract",
+      data: {
+        SeniorCitizen: 0,
+        tenure: "48",
+        MonthlyCharges: "85.00",
+        TotalCharges: "4080.00",
+        gender: "Female",
+        Partner: "Yes",
+        Dependents: "Yes",
+        PhoneService: "Yes",
+        MultipleLines: "Yes",
+        InternetService: "Fiber optic",
+        OnlineSecurity: "Yes",
+        OnlineBackup: "Yes",
+        DeviceProtection: "Yes",
+        TechSupport: "Yes",
+        StreamingTV: "Yes",
+        StreamingMovies: "Yes",
+        Contract: "Two year",
+        PaperlessBilling: "Yes",
+        PaymentMethod: "Credit card (automatic)",
+      },
+    },
+    moderate: {
+      name: "Moderate Risk Customer",
+      description: "Average tenure, some services",
+      data: {
+        SeniorCitizen: 0,
+        tenure: "24",
+        MonthlyCharges: "70.00",
+        TotalCharges: "1680.00",
+        gender: "Male",
+        Partner: "Yes",
+        Dependents: "No",
+        PhoneService: "Yes",
+        MultipleLines: "Yes",
+        InternetService: "DSL",
+        OnlineSecurity: "Yes",
+        OnlineBackup: "No",
+        DeviceProtection: "Yes",
+        TechSupport: "No",
+        StreamingTV: "Yes",
+        StreamingMovies: "No",
+        Contract: "One year",
+        PaperlessBilling: "No",
+        PaymentMethod: "Bank transfer (automatic)",
+      },
+    },
+  };
+
+  const loadSampleProfile = (profileKey) => {
+    setFormData(sampleProfiles[profileKey].data);
+    setResult(null);
+    setError(null);
+  };
+
+  // Check API status on page load
+  useEffect(() => {
+    const checkApiStatus = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL_MODEL}/health`
+        );
+        if (response.ok) {
+          setApiStatus("✅ Connected (Customer-churn-predictor API)");
+          setStatusColor("text-green-600");
+        } else {
+          throw new Error("API not responding");
+        }
+      } catch (err) {
+        setApiStatus("❌ Disconnected - Start Flask server");
+        setStatusColor("text-red-600");
+      }
+    };
+
+    checkApiStatus();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value, type } = e.target;
@@ -80,6 +189,22 @@ export default function ChurnPredictionPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-12 px-4">
       <div className="max-w-6xl mx-auto">
+        <div className="mb-6">
+          <button
+            onClick={() => (window.location.href = "/")}
+            className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 cursor-pointer"
+          >
+            {/* Gradient Background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-transform duration-300 group-hover:scale-110"></div>
+
+            {/* Shine Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500 transform -skew-x-12 group-hover:translate-x-full"></div>
+
+            {/* Button Content */}
+            <Home className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+            <span className="relative z-10">Home</span>
+          </button>
+        </div>
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-slate-900 mb-2">
             Customer Churn Predictor
@@ -87,6 +212,36 @@ export default function ChurnPredictionPage() {
           <p className="text-slate-600">
             Enter customer details to predict churn risk
           </p>
+        </div>
+
+        <div className="bg-blue-50 border-l-4 border-blue-500 p-3 mb-6 rounded text-sm">
+          <span className="text-blue-900">ℹ️ API Status: </span>
+          <span className={`font-semibold ${statusColor}`}>{apiStatus}</span>
+        </div>
+
+        {/* Sample Profiles Section */}
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h2 className="text-xl font-semibold text-slate-900 mb-3">
+            🚀 Try Sample Profiles
+          </h2>
+          <p className="text-sm text-slate-600 mb-4">
+            Click any profile below to auto-fill the form and test the
+            prediction
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {Object.entries(sampleProfiles).map(([key, profile]) => (
+              <button
+                key={key}
+                onClick={() => loadSampleProfile(key)}
+                className="text-left p-4 border-2 border-slate-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition duration-200 group"
+              >
+                <h3 className="font-semibold text-slate-900 mb-1 group-hover:text-blue-700">
+                  {profile.name}
+                </h3>
+                <p className="text-xs text-slate-600">{profile.description}</p>
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">

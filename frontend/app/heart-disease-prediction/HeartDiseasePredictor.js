@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Home } from 'lucide-react';
 
 export default function HeartDiseasePredictor() {
   const [formData, setFormData] = useState({
@@ -166,7 +167,22 @@ export default function HeartDiseasePredictor() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 flex justify-center items-center p-4">
       <div className="w-full max-w-3xl bg-white rounded-2xl shadow-2xl p-8 md:p-10">
-        
+        <div className="mb-6">
+          <button
+            onClick={() => window.location.href = '/'}
+            className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-white overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 cursor-pointer"
+          >
+            {/* Gradient Background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transition-transform duration-300 group-hover:scale-110"></div>
+            
+            {/* Shine Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500 transform -skew-x-12 group-hover:translate-x-full"></div>
+            
+            {/* Button Content */}
+            <Home className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+            <span className="relative z-10">Home</span>
+          </button>
+        </div>
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-2">❤️ Heart Disease Predictor</h1>
