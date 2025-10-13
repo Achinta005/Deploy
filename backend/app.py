@@ -32,6 +32,9 @@ app.register_blueprint(predict_medical_charge, url_prefix='/medical-charge')
 from api.heart_disease_prediction import prediction_heart_disease
 app.register_blueprint(prediction_heart_disease,url_prefix='/heart-disease')
 
+from api.customer_churn_prediction import prediction_customer_churn
+app.register_blueprint(prediction_customer_churn,url_prefix='/customer-churn')
+
 @app.route('/')
 def home():
     return {
@@ -40,6 +43,7 @@ def home():
         "endpoints": {
             "predict_medical_charge": "/medical-charge/predict",
             "prediction_heart_disease":"/heart-disease/predict",
+            "prediction_customer_churn":"/customer-churn/prediction",
             "health": "/health"
         }
     }

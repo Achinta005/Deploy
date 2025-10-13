@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { Heart, Activity, TrendingUp, Plus, ArrowRight } from 'lucide-react';
+import { Heart, Activity, TrendingUp, Plus, ArrowRight,UserSearch } from 'lucide-react';
 import Link from 'next/link';
 
 export default function MLModelsHomepage() {
@@ -8,7 +8,7 @@ export default function MLModelsHomepage() {
 
   const models = [
       {
-        id: 2,
+        id: 1,
         name: 'Medical Charges Prediction',
         description: 'Estimate your annual medical charges based on demographic and health information using regression analysis.',
         icon: Activity,
@@ -18,7 +18,7 @@ export default function MLModelsHomepage() {
         accuracy: '92% Accuracy'
       },
     {
-      id: 1,
+      id: 2,
       name: 'Heart Disease Predictor',
       description: 'Predict your heart disease risk based on medical metrics and lifestyle factors using advanced machine learning algorithms.',
       icon: Heart,
@@ -26,6 +26,16 @@ export default function MLModelsHomepage() {
       path: '/heart-disease-prediction',
       stats: '19 Features',
       accuracy: '87% Accuracy'
+    },
+    {
+      id: 3,
+      name: 'Customer Churn Predictor',
+      description: 'Predicts Customer Churn based on Consumer behaviour',
+      icon: UserSearch,
+      color: 'from-yellow-500 to-pink-600',
+      path: '/customer-churn-prediction',
+      stats: '19 Features',
+      accuracy: '80.35% Accuracy'
     },
   ];
 

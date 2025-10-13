@@ -19,7 +19,7 @@ def load_model(model_path):
             return None
         
         model_data = joblib.load(model_path)
-        print(f"Model loaded successfully : (1) Heart_Disease_Predictor.joblib")
+        print(f"Model loaded successfully")
         return model_data
     
     except Exception as e:
