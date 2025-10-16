@@ -6,24 +6,24 @@ import { Home } from 'lucide-react';
 export default function HeartDiseasePredictor() {
   const [formData, setFormData] = useState({
     Gender: 'Male',
-    'Blood Pressure': 0.466667,
-    'Cholesterol Level': 0.933333,
+    'Blood Pressure': 0.46,
+    'Cholesterol Level': 0.93,
     'Exercise Habits': 'High',
     Smoking: 'Yes',
     'Family Heart Disease': 'No',
     Diabetes: 'Yes',
-    BMI: 0.877067,
+    BMI: 0.87,
     'High Blood Pressure': 'Yes',
     'Low HDL Cholesterol': 'No',
     'High LDL Cholesterol': 'No',
     'Alcohol Consumption': 'Low',
     'Stress Level': 'Medium',
-    'Sleep Hours': 0.153273,
+    'Sleep Hours': 0.15,
     'Sugar Consumption': 'Low',
     'Triglyceride Level': 0.22,
-    'Fasting Blood Sugar': 0.575,
-    'CRP Level': 0.85884,
-    'Homocysteine Level': 0.835992
+    'Fasting Blood Sugar': 0.5,
+    'CRP Level': 0.85,
+    'Homocysteine Level': 0.83
   });
 
   const [loading, setLoading] = useState(false);
@@ -38,7 +38,7 @@ export default function HeartDiseasePredictor() {
   useEffect(() => {
     const checkApiStatus = async () => {
       try {
-        const response = await fetch(API_URL + '/health');
+        const response = await fetch('/api/health_check');
         if (response.ok) {
           setApiStatus('✅ Connected (Heart Disease API)');
           setStatusColor('text-green-600');
@@ -71,7 +71,7 @@ export default function HeartDiseasePredictor() {
     setResult(null);
 
     try {
-      const response = await fetch(API_URL + '/heart-disease/predict', {
+      const response = await fetch('/api/heart_disease', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

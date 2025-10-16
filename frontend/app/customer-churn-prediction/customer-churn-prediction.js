@@ -121,7 +121,7 @@ export default function ChurnPredictionPage() {
     const checkApiStatus = async () => {
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL_MODEL}/health`
+          `api/health_check`
         );
         if (response.ok) {
           setApiStatus("✅ Connected (Customer-churn-predictor API)");
@@ -161,7 +161,7 @@ export default function ChurnPredictionPage() {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL_MODEL}/customer-churn/prediction`,
+        `/api/customer_churn`,
         {
           method: "POST",
           headers: {

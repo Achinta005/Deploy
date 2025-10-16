@@ -25,7 +25,7 @@ export default function MedicalChargesPredictor() {
   useEffect(() => {
     const checkApiStatus = async () => {
       try {
-        const response = await fetch(API_URL + "/health");
+        const response = await fetch("/api/health_check");
         if (response.ok) {
           setApiStatus("✅ Connected (Medical Charges Api)");
           setStatusColor("text-green-600");
@@ -56,7 +56,7 @@ export default function MedicalChargesPredictor() {
     setResult(null);
 
     try {
-      const response = await fetch(API_URL + "/medical-charge/predict", {
+      const response = await fetch("/api/medical_charge", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
