@@ -715,7 +715,7 @@ export default function ChurnPredictionPage() {
             {!result && !error && (
               <div className="bg-slate-100 border-2 border-dashed border-slate-300 rounded-lg p-6 text-center">
                 <p className="text-slate-600 text-sm">
-                  Fill the form and click "Predict Churn" to see results
+                  Fill the form and click &quot;Predict Churn&quot; to see results
                 </p>
               </div>
             )}
