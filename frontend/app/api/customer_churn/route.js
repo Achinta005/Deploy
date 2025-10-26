@@ -1,7 +1,7 @@
 export async function POST(req) {
     try {
     const formData = await req.json();
-
+    console.log(formData)
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_PYTHON_ML_SERVER}/customer-churn/prediction`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
