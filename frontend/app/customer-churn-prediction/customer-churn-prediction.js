@@ -158,7 +158,7 @@ export default function ChurnPredictionPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-
+console.log(formData)
     try {
       const response = await fetch(
         `/api/customer_churn`,
