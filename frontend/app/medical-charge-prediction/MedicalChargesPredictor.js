@@ -54,7 +54,7 @@ export default function MedicalChargesPredictor() {
     setLoading(true);
     setError("");
     setResult(null);
-
+console.log(formData)
     try {
       const response = await fetch("/api/medical_charge", {
         method: "POST",

@@ -69,6 +69,7 @@ export default function HeartDiseasePredictor() {
     setLoading(true);
     setError('');
     setResult(null);
+    console.log(formData)
 
     try {
       const response = await fetch('/api/heart_disease', {
