@@ -35,6 +35,9 @@ app.register_blueprint(prediction_heart_disease,url_prefix='/heart-disease')
 from api.customer_churn_prediction import prediction_customer_churn
 app.register_blueprint(prediction_customer_churn,url_prefix='/customer-churn')
 
+from api.uplift_model import predict_customer_uplift
+app.register_blueprint(predict_customer_uplift,url_prefix='/predict_uplift')
+
 @app.route('/')
 def home():
     return {

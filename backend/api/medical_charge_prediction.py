@@ -94,6 +94,7 @@ def predict():
 
 @predict_medical_charge.route('/predict-info', methods=['GET'])
 def predict_info():
+    
     """Get information about prediction endpoint"""
     return jsonify({
         "endpoint": "/api/predict",
